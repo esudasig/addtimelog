@@ -1,15 +1,13 @@
-import express from 'express';
-import projectRoutes from './routes/projects.js';
-
+const express = require("express");
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({
-    extended: true
-}));
+app.listen(3000, () => {
+  console.log("Application started and Listening on port 3000");
+});
 
-app.use('/projects', projectRoutes);
+// serve your css as static
+app.use(express.static(__dirname));
 
-app.get('/', (req, res) => res.send("Hello from homepage"));
-
-app.listen((process.env.PORT || 4343), () => console.log(`Server Running on port: http://localhost:4343`));
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/teams.htm");
+});
